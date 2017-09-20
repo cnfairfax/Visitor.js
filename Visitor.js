@@ -82,27 +82,27 @@ function vAttribute(input) {
     } else {
         this.name = input.name;
     }
+    if(input.type = 'select-one') {
+        this.valueLabel = input.innerHTML ? input.querySelector('option[value="' + input.value + '"]').textContent : input.valueLabel;
+    }
+    this.type = input.type;
     this.value = input.value;
 }
 
-window.onload = function() {
-    if(typeof jQuery == 'function' || typeof $ == 'function') {
-        if(typeof jQuery != 'function') {
-            var jQuery = $;
-        }
-        jQuery(document).ready(function(){
-            Visitor.render(jQuery);
-            jQuery('.dynamo-form form').submit(function(){
-                Visitor.write();
-            });
-        });
+vAttribute.prototype.render = function(element) {
+    if(this.type == 'select-one') {
+        element.textContent = this.valueLabel;
     } else {
-        document.addEventListener('DOMContentLoaded',function(){
-            Visitor.render();
-            var form = document.getElementsByClassName('dynamo-form');
-            form[0].getElementsByTagName('form')[0].addEventListener('submit', function(){
-                Visitor.write();
-            });
-        });
+        element.textContent = this.value;
     }
+}
+
+window.onload = function() {
+    document.addEventListener('DOMContentLoaded',function(){
+        Visitor.render();
+        var form = document.querySelector('.dynamo-form form');
+        form.addEventListener('submit', function(){
+            Visitor.write();
+        });
+    });
 }
