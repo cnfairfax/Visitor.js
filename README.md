@@ -14,3 +14,5 @@ Rendering dynamic content is as easy as inserting a `<cd>` tag into your normal 
 ```html
 <h1>Hey <cd data-dynamo="...fieldname goes here...">...Default Text Goes Here...</cd> <cd data-dynamo="lastname"></cd>!</h1>
 ```
+
+### Coming soon... Instructions for conditional blocks 
